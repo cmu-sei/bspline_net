@@ -1,0 +1,11 @@
+*__pycache__*
+*/*.egg-info/*
+lightning_logs/*
+**checkpoint*
+**/.Trash*
+models/*
+ZscalerRootCA.crt
+*/*.ckpt
+outputs/*
+**/*.ckpt
+docker-compose.yml

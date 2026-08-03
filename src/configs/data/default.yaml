@@ -1,0 +1,53 @@
+#bspline_net (Github)
+
+#Copyright 2026 Carnegie Mellon University.
+
+#NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+
+#Licensed under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+
+#[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+
+#This Software includes and/or makes use of Third-Party Software each subject to its own license.
+
+#DM26-0750
+
+# Data generation and normalization parameters
+
+# --- Batch configuration ---
+batch_size: 2500
+batches_per_epoch: 100 #
+val_batches: 25 #
+test_batches: 1
+num_workers: 2 #39 #
+pin_memory: False
+persistent_workers: True
+prefetch_factor: 2
+regen_every_n_epochs: 5
+
+# --- Initial condition sampling ---
+min_radius: 0.001  # Minimum radius for shell sampling
+
+# --- Time discretization ---
+time_horizon: 2.5  # seconds
+sample_interval: 0.005  # seconds
+# n_samples computed as: int(time_horizon / sample_interval) + 1
+
+# --- B-spline configuration ---
+spline_degree: 3
+max_density: 40 # knots per second
+min_density: 2 # knots per second
+
+# --- Initial Condition range---
+max_x: 5.0      # m - maximum position
+max_dx: 3.0     # m/s - maximum velocity  
+max_ag: 0.7854  # radians (pi/4) - maximum angle
+max_da: 1.5708  # rad/sec (pi/2) - maximum angular velocity
+n_dim : 12 # dimensions of quadrotor problem. does not change
+# --- Vehicle Limitations ---
+max_translational_rate: 5.0 # m/s (Crazyflie)
+max_roll_pitch_rate: 12 # rad/sec (Crazyflie)
+max_yaw_rate: 6 # rad/sec (Crazyflie)
+# --- CP Dataset specific ---
+uniform_knot_prob: 0.3  # Probability of using uniform vs adaptive-like knots
+random_knot_prob: 0.3  # Probability of using random vs adaptive-like knots

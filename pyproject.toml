@@ -1,0 +1,62 @@
+[project]
+name = "bsplinenet"
+version = "0.0.1"
+authors = [
+  { name="J. Ratchford", email="jratchford@sei.cmu.edu" },
+]
+description = "Bsplines for control"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3"
+]
+
+
+dependencies = [
+    "aim>=3.17",
+    "hydra-core>=1.3.2",
+    "hydra-optuna-sweeper<1.4.0",
+    "matplotlib",
+    "numpy",
+    "torch>=2.0",
+    "torchinfo>=1.8.0",
+#    "tensorflow==2.20.0",
+    "numba>=0.63.1",
+    "pytorch-lightning>=2.0",
+    "optuna>=2.10.0,<3.0.0",
+    "omegaconf>=2.3",
+    "sqlalchemy>=1.3.0,<2.0.0",
+    "scipy",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "isort",
+    "flake8",
+]
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["bsplinenet", "bsplinenet.*", "configs", "configs.*"]
+
+[project.scripts]
+train = "bsplinenet.train:main"
+onnxexport = "bsplinenet.onnx.export:main"
+test_dataloading = "bsplinenet.test_dataloading:main"
+test_modelloading = "bsplinenet.test_modelloading:main"
+visualize_data = "bsplinenet.visualize_data:main"
+knot_analysis = "bsplinenet.analysis.knot_analysis:main"
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"

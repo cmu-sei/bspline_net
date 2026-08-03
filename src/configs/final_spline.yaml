@@ -1,0 +1,41 @@
+#bspline_net (Github)
+
+#Copyright 2026 Carnegie Mellon University.
+
+#NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+
+#Licensed under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+
+#[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+
+#This Software includes and/or makes use of Third-Party Software each subject to its own license.
+
+#DM26-0750
+
+checkpoint_path: "/home/hspn-user/analysis_results/traj/final_baseline_ckpt_d128_r251.ckpt"
+knot_model_path: "/home/hspn-user/analysis_results/knots/22.4k_small_model.ckpt"
+output_dir: "analysis_results/traj/control_point_interval_analysis/"
+seed: 42
+uniform: false
+
+# Post-conformal adjustment from the conformal_analysis run on this model.
+# Widening per dim is Q * R[d] * w[d].
+# w values from "/home/hspn-user/analysis_results/traj/final_baseline_ckpt_d128_r251.ckpt"
+conformal:
+  Q: 9.329e-04
+  R: [3.0, 5.0, 3.0, 5.0, 3.0, 5.0, 1.5708, 0.7854, 1.5708, 0.7854, 1.5708, 0.7854]
+  w: [0.874, 0.244, 0.877, 0.231, 1.396, 0.398, 2.819, 2.771, 2.694, 2.763, 0.453, 1.584]
+
+channel_names:
+  - "u [m/sec]"
+  - "x [m]"
+  - "v [m/sec]"
+  - "y [m]"
+  - "w [m/sec]"
+  - "z [m]"
+  - "p [rad/sec]"
+  - "$\\phi$ [rad]" 
+  - "q [rad/sec]"
+  - "$\\theta$ [rad]"
+  - "r [rad/sec]"
+  - "$\\psi$ [rad]"

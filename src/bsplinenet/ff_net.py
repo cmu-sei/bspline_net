@@ -1,0 +1,51 @@
+"""
+bspline_net (Github)
+
+Copyright 2026 Carnegie Mellon University.
+
+NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+
+Licensed under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+
+[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+
+This Software includes and/or makes use of Third-Party Software each subject to its own license.
+
+DM26-0750
+"""
+from enum import Enum, auto
+from functools import partial
+
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from quadrotor.quadrotor import load_matrix_K, quadrotor_dx  # , jax_quadrotor_dx,
+from scipy.integrate import odeint
+
+from bsplinenet.utils import *
+
+from .Bspline_functions import Bs_comp, BsKnots, duffing_sys, leastSquaresInversion
+
+
+# Define the neural network architecture
+class FeedforwardNN(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(FeedforwardNN, self).__init__()
+        self.fc1 = nn.Linear(input_size, hidden_size)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(hidden_size, output_size)
+
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.relu(x)
+        x = self.fc2(x)
+        return x
+
+    def loss(self, true_values, pred_values):
+        """
+        mean squared difference
+        """
+        return (true_values - pred_values).square().mean()

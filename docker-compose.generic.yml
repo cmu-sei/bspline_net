@@ -1,0 +1,68 @@
+#bspline_net (Github)
+
+#Copyright 2026 Carnegie Mellon University.
+
+#NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+
+#Licensed under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+
+#[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+
+#This Software includes and/or makes use of Third-Party Software each subject to its own license.
+
+#DM26-0750
+
+services:
+  proj:
+    build: 
+      context: .
+      args:
+        - HTTP_PROXY=<your_proxy>
+        - HTTPS_PROXY=<your_proxy>
+        - NO_PROXY=localhost
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - HTTP_PROXY=<your_proxy>
+      - HTTPS_PROXY=<your_proxy>
+      - NO_PROXY=localhost
+      - http_proxy=<your_proxy>
+      - https_proxy=<your_proxy>
+      - no_proxy=localhost
+      - MY_UID=${MY_UID}
+      - MY_GID=${MY_GID}
+    volumes:
+      - ./models:/home/proj-user/models
+      - ./data:/home/proj-user/data
+      - ./src:/home/proj-user/src
+      - ./logs:/home/proj-user/logs
+      - ./tests:/home/proj-user/tests
+      - ./checkpoints:/home/proj-user/checkpoints
+      - ./outputs:/home/proj-user/outputs
+      - ./analysis_results:/home/proj-user/analysis_results 
+    ports:
+      - "6006:6006"   # tensorboard
+      - "6007:6007"   # tensorboard alternative
+      - "8888:8888"   # jupyter
+    shm_size: '64g'
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    stdin_open: true
+    tty: true
+
+  proj-dev:
+    extends:
+      service: proj
+    build:
+      args:
+        - DEV=true
+

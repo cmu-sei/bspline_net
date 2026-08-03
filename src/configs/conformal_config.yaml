@@ -1,0 +1,48 @@
+#bspline_net (Github)
+
+#Copyright 2026 Carnegie Mellon University.
+
+#NO WARRANTY. THIS CARNEGIE MELLON UNIVERSITY AND SOFTWARE ENGINEERING INSTITUTE MATERIAL IS FURNISHED ON AN "AS-IS" BASIS. CARNEGIE MELLON UNIVERSITY MAKES NO WARRANTIES OF ANY KIND, EITHER EXPRESSED OR IMPLIED, AS TO ANY MATTER INCLUDING, BUT NOT LIMITED TO, WARRANTY OF FITNESS FOR PURPOSE OR MERCHANTABILITY, EXCLUSIVITY, OR RESULTS OBTAINED FROM USE OF THE MATERIAL. CARNEGIE MELLON UNIVERSITY DOES NOT MAKE ANY WARRANTY OF ANY KIND WITH RESPECT TO FREEDOM FROM PATENT, TRADEMARK, OR COPYRIGHT INFRINGEMENT.
+
+#Licensed under a MIT (SEI)-style license, please see license.txt or contact permission@sei.cmu.edu for full terms.
+
+#[DISTRIBUTION STATEMENT A] This material has been approved for public release and unlimited distribution.  Please see Copyright notice for non-US Government use and distribution.
+
+#This Software includes and/or makes use of Third-Party Software each subject to its own license.
+
+#DM26-0750
+
+# Conformal-prediction analysis on a quantile-mode trajectory model.
+# Mirrors branch_error_config.yaml; new fields specific to CQR are below.
+
+# --- Required ---
+# Path to the trained quantile-mode LitTrajModel checkpoint (.ckpt).
+# r=501 models tend to give lower CQR W value
+# checkpoint_path: /home/hspn-user/checkpoints/sweep_logs/traj/d128_r501_s43_b2500_q95_p0/traj-epoch=896-val/loss=0.00010.ckpt #/home/hspn-user/models/quantile_trajectory2.ckpt
+checkpoint_path: /home/hspn-user/analysis_results/traj/final_baseline_ckpt_d128_r251.ckpt
+
+
+# Where plots and any artifacts get written.
+output_dir: /home/hspn-user/analysis_results/traj/results_conformal
+
+# --- Calibration / test split ---
+# Total number of samples to collect from the data pipeline.
+calibration_size: 100000
+# Fraction used for CQR calibration (computing Q_hat). The remainder is the
+# held-out test set for coverage measurement.
+calibration_fraction: 0.8
+
+# --- CQR parameters ---
+# Miscoverage level. With quantile heads at [0.025, 0.975] (95% target),
+# alpha = 0.05. The script defaults alpha to (1 - nominal_coverage) inferred
+# from the model's quantile_levels; set explicitly here to override.
+#alpha: 0.05
+
+# --- Plotting ---
+# Which output dimensions to show in the example trajectory plot.
+plot_dims: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+# --- Reproducibility ---
+# Seed for torch and numpy. The data generator's test_dataloader is
+# seeded by the global torch RNG (via worker_init_fn or num_workers=0).
+analysis_seed: 13413
