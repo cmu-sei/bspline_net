@@ -49,7 +49,7 @@ test_dataloading = "bsplinenet.test_dataloading:main"
 test_modelloading = "bsplinenet.test_modelloading:main"
 visualize_data = "bsplinenet.visualize_data:main"
 knot_analysis = "bsplinenet.analysis.knot_analysis:main"
-
+run_end_to_end = "bsplinenet.analysis.run_end_to_end:main"
 [tool.black]
 line-length = 100
 
