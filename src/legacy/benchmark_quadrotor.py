@@ -13,6 +13,9 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# NOTE: SCRATCH SCRIPT. Timing benchmark for the numba quadrotor dynamics (quadrotor_dx_fast).
+# Not part of either paper's pipeline. It never imports quadrotor_dx_fast, so it raises a
+# NameError if run as-is. Left unchanged.
 import time
 
 import numba as nb
