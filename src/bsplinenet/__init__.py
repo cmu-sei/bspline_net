@@ -14,7 +14,6 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 DM26-0750
 """
 from .utils import *
-from .vis import plot
 
 __all__ = [
     "ODESYS",
@@ -33,5 +32,4 @@ __all__ = [
     "compute_trajectory_loss",
     "physics_loss",
     "mask_controlpoints",
-    "plot",
 ]

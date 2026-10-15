@@ -13,6 +13,7 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# PAPER: TMLR
 """Standalone trajectory model training."""
 
 import pytorch_lightning as pl

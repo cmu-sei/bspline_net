@@ -13,6 +13,7 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# PAPER: shared
 """Data modules and datasets for B-spline trajectory learning.
 
 Three training stages:

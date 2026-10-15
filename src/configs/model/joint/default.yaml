@@ -12,6 +12,9 @@
 
 #DM26-0750
 
+# NOTE: DANGLING CONFIG. Used only by the joint (end-to-end knot + control point) model in
+# joint_model.py, which was never completed and is NOT used in either paper (IEEE or TMLR).
+
 # Joint training configuration
 
 knot_lr: ${rates.knot_lr}

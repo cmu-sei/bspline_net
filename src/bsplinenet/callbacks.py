@@ -13,7 +13,8 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
-# src/projectm/callbacks.py
+# PAPER: shared
+# src/bsplinenet/callbacks.py
 """Visualization callbacks for training.
 
 Helpers grouped by concern: knot, trajectory, CP. Per-model orchestrators

@@ -13,38 +13,8 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
-"""
-Knot-Placement Analysis for B-Spline Trajectories
-=================================================
+# PAPER: IEEE 2026 (knot placement) - debug tool
 
-This script evaluates the quality of the knot-placement predictions made by a
-trained ``LitKnotModel``.  It loads a checkpoint, runs inference on a test
-datamodule, reconstructs the corresponding B-splines, and produces a suite of
-diagnostic visualisations:
-
-* RMSE and R^2 comparison between *predicted* and *even-spaced* knot placements.
-* Histograms of RMSE, number of knots, and per-bin RMSE distributions.
-* Scatter plots of input initial conditions vs. RMSE improvement.
-* Control-point distance vs. predicted jerk-activity analysis.
-* Example trajectory visualisations (truth, predicted fit, even-spaced fit,
-  control points, residuals).
-* Jerk-activity prediction vs. ground-truth scatter with relative-error inset.
-
-All figures are saved under ``analyses/knots/`` (or the path you specify in the
-Hydra configuration) and are also displayed interactively via ``matplotlib``.
-
-Typical usage
--------------
-Run the script with Hydra configuration overrides, e.g.:
-
-```bash
-python src/bsplinenet/analysis/knot_analysis.py \
-    ckpt_path=path/to/checkpoint.ckpt \
-    data.batch_size=1000 \
-    data.test_batches=10 \
-    model.knots.max_error=0.001
-```
-"""
 
 #!/usr/bin/env python3
 import hydra

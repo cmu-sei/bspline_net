@@ -13,6 +13,7 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# PAPER: IEEE 2026 (knot placement); also used by the TMLR analysis
 """Knot placement model for adaptive B-spline knot spacing.
 
 Predicts spacing/activity from initial conditions, which is then

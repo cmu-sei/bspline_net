@@ -13,6 +13,7 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# PAPER: shared
 #!/usr/bin/env python3
 """Main training script for B-spline trajectory learning.
 

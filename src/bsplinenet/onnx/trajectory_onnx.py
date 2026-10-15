@@ -13,6 +13,7 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# PAPER: deployment (ONNX export)
 """Export TrajectoryModel -> ONNX for Raspberry Pi latency benchmarking."""
 
 import torch

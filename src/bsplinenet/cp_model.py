@@ -13,6 +13,9 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# LEGACY CODE - intermediate code during development designed to learn the B-spline pseudoinverse.
+# We found that this did not provide meaningful speed improvements compared to calculating the
+# exact pseudoinverse.
 """Control point prediction model.
 
 The trunk learns to approximate the pseudoinverse of the B-spline basis matrix

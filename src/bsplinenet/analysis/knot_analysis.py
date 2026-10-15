@@ -13,6 +13,7 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# PAPER: IEEE 2026 (knot placement)
 from pathlib import Path
 
 import hydra
@@ -315,6 +316,10 @@ def main(cfg: DictConfig):
     OmegaConf.update(cfg, "data.batch_size", 1000, force_add=True)
     OmegaConf.update(cfg, "data.test_batches", 10, force_add=True)
     OmegaConf.update(cfg, "data.num_workers", 1, force_add=True)
+    # NOTE: this max_error override has no effect on the knot placement below. The model is rebuilt from the checkpoint's saved
+    # hyper-parameters, and predict_knots() uses the max_error stored there
+    # (0.01 for analysis_results/knots/22.4k_small_model.ckpt). Keeping this here
+    # because this was the code as originally written for the paper.
     OmegaConf.update(cfg, "model.knots.max_error", 0.001, force_add=True)
 
     print(OmegaConf.to_yaml(cfg))

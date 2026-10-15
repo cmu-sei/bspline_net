@@ -13,6 +13,7 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# PAPER: TMLR
 """Per-dim-weighted conformal prediction for the quantile-mode trajectory model.
 
 For each calibration trajectory, score = max over (t, d) of band_residual / (R[d]*w[d]).

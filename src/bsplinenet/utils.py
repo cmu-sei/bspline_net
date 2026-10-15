@@ -13,6 +13,7 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# PAPER: shared
 from enum import Enum, auto
 from functools import partial
 from pathlib import Path

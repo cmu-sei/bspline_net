@@ -13,6 +13,10 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# NOTE: DANGLING CODE. This joint (end-to-end knot + control point) model was never completed
+# and is NOT used in either paper (IEEE or TMLR). It is kept only because train.py (stage=joint) and the tests import it.
+# It reads cfg.model.cp.rank / metapos, which are no longer in configs/model/cp/default.yaml,
+# so stage=joint is not expected to run as-is.
 """Joint model for fine-tuning knot and control point models together."""
 
 import pytorch_lightning as pl

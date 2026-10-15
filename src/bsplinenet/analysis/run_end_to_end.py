@@ -13,6 +13,7 @@ This Software includes and/or makes use of Third-Party Software each subject to 
 
 DM26-0750
 """
+# PAPER: TMLR
 """End-to-end control-interval margin assessment.
 
 (1) Loads a trajectory model + knot model
