@@ -7,5 +7,9 @@ models/*
 ZscalerRootCA.crt
 */*.ckpt
 outputs/*
+src/outputs/
+scripts/notebooks/
 **/*.ckpt
+.env
 docker-compose.yml
+.python-version

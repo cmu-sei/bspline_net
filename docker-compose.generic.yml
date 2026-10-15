@@ -13,13 +13,14 @@
 #DM26-0750
 
 services:
-  proj:
+  hspn:
     build: 
       context: .
-      args:
-        - HTTP_PROXY=<your_proxy>
-        - HTTPS_PROXY=<your_proxy>
-        - NO_PROXY=localhost
+      # If you build behind a proxy, uncomment and fill in:
+      # args:
+      #   - HTTP_PROXY=your_proxy.com:80
+      #   - HTTPS_PROXY=your_proxy.com:80
+      #   - NO_PROXY=localhost,.local
     runtime: nvidia
     deploy:
       resources:
@@ -30,23 +31,24 @@ services:
               capabilities: [gpu]
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
-      - HTTP_PROXY=<your_proxy>
-      - HTTPS_PROXY=<your_proxy>
-      - NO_PROXY=localhost
-      - http_proxy=<your_proxy>
-      - https_proxy=<your_proxy>
-      - no_proxy=localhost
+      # If you run behind a proxy, uncomment and fill in:
+      # - HTTP_PROXY=your_proxy.com:80
+      # - HTTPS_PROXY=your_proxy.com:80
+      # - NO_PROXY=localhost,.local
+      # - http_proxy=your_proxy.com:80
+      # - https_proxy=your_proxy.com:80
+      # - no_proxy=localhost,.local
       - MY_UID=${MY_UID}
       - MY_GID=${MY_GID}
     volumes:
-      - ./models:/home/proj-user/models
-      - ./data:/home/proj-user/data
-      - ./src:/home/proj-user/src
-      - ./logs:/home/proj-user/logs
-      - ./tests:/home/proj-user/tests
-      - ./checkpoints:/home/proj-user/checkpoints
-      - ./outputs:/home/proj-user/outputs
-      - ./analysis_results:/home/proj-user/analysis_results 
+      - ./models:/home/hspn-user/models
+      - ./data:/home/hspn-user/data
+      - ./src:/home/hspn-user/src
+      - ./logs:/home/hspn-user/logs
+      - ./tests:/home/hspn-user/tests
+      - ./checkpoints:/home/hspn-user/checkpoints
+      - ./outputs:/home/hspn-user/outputs
+      - ./analysis_results:/home/hspn-user/analysis_results 
     ports:
       - "6006:6006"   # tensorboard
       - "6007:6007"   # tensorboard alternative
@@ -59,9 +61,9 @@ services:
     stdin_open: true
     tty: true
 
-  proj-dev:
+  hspn-dev:
     extends:
-      service: proj
+      service: hspn
     build:
       args:
         - DEV=true

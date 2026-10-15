@@ -15,19 +15,23 @@
 FROM nvcr.io/nvidia/pytorch:23.08-py3
 
 # ============ CERTIFICATES & PROXY ============
-COPY ZscalerRootCA.crt /usr/local/share/ca-certificates/
-RUN update-ca-certificates && chmod 644 /etc/ssl/certs/ca-certificates.crt
+# if you need to add a custom certificate, uncomment the following lines and add your certificate to the Dockerfile directory
+#COPY CERT.crt /usr/local/share/ca-certificates/
+#RUN update-ca-certificates && chmod 644 /etc/ssl/certs/ca-certificates.crt
 
+#
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
     REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
     CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
-    HTTP_PROXY="http://cloudproxy.sei.cmu.edu:80" \
-    HTTPS_PROXY="http://cloudproxy.sei.cmu.edu:80" \
-    NO_PROXY="localhost,.local,*.sei.cmu.edu,*.cert.org" \
-    http_proxy="http://cloudproxy.sei.cmu.edu:80" \
-    https_proxy="http://cloudproxy.sei.cmu.edu:80" \
-    no_proxy="localhost,.local,*.sei.cmu.edu,*.cert.org" \
     VCPKG_FORCE_SYSTEM_BINARIES=1
+
+# If you build behind a proxy, uncomment and fill in:
+# ENV HTTP_PROXY="your_proxy.com:80" \
+#     HTTPS_PROXY="your_proxy.com:80" \
+#     NO_PROXY="localhost,.local" \
+#     http_proxy="your_proxy.com:80" \
+#     https_proxy="your_proxy.com:80" \
+#     no_proxy="localhost,.local"
 
 # ============ SYSTEM PACKAGES ============
 RUN apt-get update \
