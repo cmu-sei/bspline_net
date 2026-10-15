@@ -1,4 +1,0 @@
-python3 scripts/train_lightning.py --repeat 50 -t data/trial1_240130/data__3_2_1-100_100-10_40_1600.nc -v data/trial1_240130/data__3_2_1-100_100-10_40_400.nc --config config
-s/trial2/config_train.ini  --model repeat2/data__3_2_1-100_100-10_40_1600_400_ff --network feedforward
-
-python3 scripts/train_lightning.py  -t data/quadrotor_v1/data__quadrotor_3_12_1-100_25-10_50_5000.nc  -v data/quadrotor_v1/data__quadrotor_3_12_1-100_25-10_50_500.nc -c  configs/quadrotor_v1/config_train_recurrent_cyl.ini  -m quadrotor_v1_r_cyl >~/configs/log_cyl.log
