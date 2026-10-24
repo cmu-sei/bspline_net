@@ -19,8 +19,10 @@ DM26-0750
 
 Usage:
     python -m bsplinenet.train stage=knots
-    python -m bsplinenet.train stage=cp
-    python -m bsplinenet.train stage=joint knot_checkpoint=path/to/knot.ckpt cp_checkpoint=path/to/cp.ckpt
+    python -m bsplinenet.train stage=traj
+    # retired (code in src/legacy/):
+    # python -m bsplinenet.train stage=cp
+    # python -m bsplinenet.train stage=joint knot_checkpoint=path/to/knot.ckpt cp_checkpoint=path/to/cp.ckpt
 
     # With overrides
     python -m bsplinenet.train stage=knots model.knots.lr=0.001 data.batch_size=64
@@ -43,9 +45,9 @@ from pytorch_lightning.callbacks import EarlyStopping, LearningRateMonitor, Mode
 from pytorch_lightning.loggers import TensorBoardLogger
 
 from .callbacks import get_visualization_callback
-from .cp_model import LitCPModel
+# from .cp_model import LitCPModel
 from .data import compute_derived_data_config, get_datamodule
-from .joint_model import LitJointModel
+# from .joint_model import LitJointModel
 from .knot_model import LitKnotModel
 from .traj_model import LitTrajModel
 
@@ -63,14 +65,14 @@ def get_model(stage: str, cfg: DictConfig):
         return LitKnotModel(cfg)
     elif stage == "traj":
         return LitTrajModel(cfg)
-    elif stage == "cp":
-        return LitCPModel.from_checkpoints(cfg, traj_checkpoint=cfg.get("traj_checkpoint"))
-    elif stage == "joint":
-        return LitJointModel.from_checkpoints(
-            cfg,
-            knot_checkpoint=cfg.get("knot_checkpoint"),
-            cp_checkpoint=cfg.get("cp_checkpoint"),
-        )
+    # elif stage == "cp":
+    #     return LitCPModel.from_checkpoints(cfg, traj_checkpoint=cfg.get("traj_checkpoint"))
+    # elif stage == "joint":
+    #     return LitJointModel.from_checkpoints(
+    #         cfg,
+    #         knot_checkpoint=cfg.get("knot_checkpoint"),
+    #         cp_checkpoint=cfg.get("cp_checkpoint"),
+    #     )
     else:
         raise ValueError(f"Unknown stage: {stage}. Must be one of: knots, cp, joint")
 

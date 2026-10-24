@@ -13,3 +13,4 @@ scripts/notebooks/
 .env
 docker-compose.yml
 .python-version
+notes.md

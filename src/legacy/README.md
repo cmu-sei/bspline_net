@@ -19,6 +19,5 @@ this code belongs to is preserved on the `ieee_paper` git branch.
 | `test_dataloading.py`, `test_modelloading.py`, `tests/` | Earlier smoke and unit tests |
 | `benchmark_quadrotor.py` | Timing script for the quadrotor dynamics |
 | `vis.py` | Training-diagnostics plot function for the old pipeline |
-
-`src/bsplinenet/cp_model.py` and `src/bsplinenet/joint_model.py` are also retired but remain in the package
-because `train.py` imports them.
+| `cp_model.py` | Model to learn the B-spline pseudoinverse; superseded by the exact pseudoinverse (`stage=cp`) |
+| `joint_model.py` | Knot model + `cp_model` trained together; never completed (`stage=joint`) |
